@@ -7,13 +7,12 @@ FROM golang:1.16-buster AS build
 
 WORKDIR /Aliceclient
 
- COPY /Aliceclient/go.mod ./
-# COPY go.sum ./
- RUN go mod download
+COPY Aliceclient/go.mod ./
+RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /Aliceclient/
+RUN go build -o /Aliceclient/aliceClient
 
 ##
 ## Deploy
@@ -22,10 +21,11 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build /client-alice /client-alice
+COPY --from=build /Aliceclient/aliceClient /client-alice
 
 EXPOSE 8080
 
 USER nonroot:nonroot
 
 ENTRYPOINT ["/client-alice"]
+
