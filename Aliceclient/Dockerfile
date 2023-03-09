@@ -12,7 +12,7 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /Aliceclient/aliceClient
+RUN go build -o /Aliceclient/aliceClient.go
 
 ##
 ## Deploy
