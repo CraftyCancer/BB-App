@@ -23,7 +23,7 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build /Aliceclient/aliceClient /client-alice
+COPY --from=build /Aliceclient/aliceClient.go /client-alice
 
 EXPOSE 8080
 
