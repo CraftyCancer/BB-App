@@ -13,7 +13,7 @@ WORKDIR /Aliceclient
 
 COPY *.go ./
 
-RUN go build -o /client-alice
+RUN go build -o /Aliceclient/client-alice
 
 ##
 ## Deploy
