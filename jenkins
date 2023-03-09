@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('git clone') {
+            steps {
+                git 'https://github.com/CraftyCancer/BB-App.git'
+            }
+        }
+        
+        stage('build') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'ksoni1034', passwordVariable: 'Zxcvbnm@1')]) {
+                    script {
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            def customImage = docker.build("ksoni1034/aliceclient", "--file Aliceclient/Dockerfile .")
+                            customImage.push()
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('deploy') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    script {
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            def customImage = docker.image('ksoni1034/aliceclient')
+                            customImage.run('-p 8080:80 -d')
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            sh 'docker logout'
+        }
+    }
+}
