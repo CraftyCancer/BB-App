@@ -5,7 +5,7 @@
 ##
 FROM golang:1.16-buster AS build
 
-WORKDIR /
+WORKDIR /Aliceclient
 
  COPY go.mod ./
 # COPY go.sum ./
