@@ -29,7 +29,7 @@ EXPOSE 8095
 
 USER nonroot:nonroot
 
-CMD ["/client-alice"]
+CMD ["./client-alice"]
 
 # ENTRYPOINT ["/client-alice"]
 
