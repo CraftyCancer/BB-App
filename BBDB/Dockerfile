@@ -7,9 +7,10 @@ FROM golang:1.16-buster AS build
 
 WORKDIR /BBDB
 
-COPY BBDB/go.mod ./
-COPY BBDB/BBDB.go ./
-RUN go mod download
+ COPY BBDB/go.mod ./
+ COPY BBDB/BBDB.go ./
+# COPY go.sum ./
+ RUN go mod download
 
 COPY *.go ./
 
@@ -24,8 +25,10 @@ WORKDIR /
 
 COPY --from=build BBDB/BBDB.go /bbdatabase
 
+RUN chmod +x /bbdatabase
+
 EXPOSE 3333
 
-USER root
+USER nobody
 
 ENTRYPOINT ["/bbdatabase"]
