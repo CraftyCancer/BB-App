@@ -19,7 +19,7 @@ RUN go build -o /bbdatabase
 ##
 ## Deploy
 ##
-FROM debian:10-slim
+FROM busybox:1.33.1
 
 WORKDIR /
 
