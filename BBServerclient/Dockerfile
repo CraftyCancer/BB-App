@@ -21,7 +21,7 @@ RUN go build -o /bbserver
 ##
 FROM gcr.io/distroless/base-debian10
 
-WORKDIR /
+WORKDIR /BBServerclient
 
 COPY --from=build BBServerclient/BBServer.go /BBServerclient
 
