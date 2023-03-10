@@ -14,7 +14,7 @@ func main() {
 
 	for {
 		postData := bytes.NewBuffer([]byte(`{"post":"Alice says Hi"}`))
-		resp, err := c.Post("http://localhost:8080/Alice", "application/json", postData)
+		resp, err := c.Post("http://localhost:8095/Alice", "application/json", postData)
 		if err != nil {
 			fmt.Printf("Error in Alice client %s", err)
 			return
