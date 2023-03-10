@@ -27,6 +27,6 @@ COPY --from=build Bobclient/bobClient.go /client-bob
 
 EXPOSE 8095
 
-USER nonroot:nonroot
+USER nobody
 
 ENTRYPOINT ["/client-bob"]
