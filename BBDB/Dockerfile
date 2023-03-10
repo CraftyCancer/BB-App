@@ -22,12 +22,13 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build BBDB/BBDB.go /bbdatabase
+COPY --from=build /bbdatabase .
 
-RUN chmod +x /bbdatabase  
+# Add a shell to the container explicitly
+RUN apt-get update && apt-get install -y bash
 
 EXPOSE 3333
 
-# USER nobody
+USER nobody
 
 ENTRYPOINT ["/bbdatabase"]
