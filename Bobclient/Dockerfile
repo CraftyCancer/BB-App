@@ -9,8 +9,7 @@ WORKDIR /Bobclient
 
 COPY Bobclient/go.mod ./
 COPY Bobclient/bobClient.go ./
-# COPY go.sum ./
- RUN go mod download
+RUN go mod download
 
 COPY *.go ./
 
@@ -23,7 +22,9 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build Bobclient/bobClient.go /client-bob
+COPY --from=build /client-bob /client-bob
+
+RUN chmod +x /client-bob
 
 EXPOSE 8095
 
