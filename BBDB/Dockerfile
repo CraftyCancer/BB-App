@@ -7,7 +7,8 @@ FROM golang:1.16-buster AS build
 
 WORKDIR /
 
- COPY go.mod ./
+ COPY BBDB/go.mod ./
+ COPY BBDB/BBDB.go ./
 # COPY go.sum ./
  RUN go mod download
 
@@ -22,7 +23,7 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build /bbdatabase /bbdatabase
+COPY --from=build BBDB/BBDB.go /bbdatabase
 
 EXPOSE 3333
 
