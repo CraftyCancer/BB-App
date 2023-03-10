@@ -8,8 +8,7 @@ FROM golang:1.16-buster AS build
 WORKDIR /BBServerclient
 
 COPY BBServerclient/go.mod ./
-COPY BBServerclient/BBServer.go ./ 
-# COPY go.sum ./
+COPY BBServerclient/BBServer.go ./
 RUN go mod download
 
 COPY *.go ./
@@ -23,11 +22,12 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build BBServerclient/BBServer.go /bbserver
+COPY --from=build /bbserver /bbserver
+COPY --from=build /etc/passwd /etc/passwd
 
 EXPOSE 8095
 EXPOSE 3333
 
-USER nonroot:nonroot
+USER bbserveruser
 
 ENTRYPOINT ["/bbserver"]
