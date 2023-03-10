@@ -18,7 +18,7 @@ RUN go build -o /client-bob
 ##
 ## Deploy
 ##
-FROM gcr.io/distroless/base-debian10
+FROM busybox:1.33.1
 
 WORKDIR /
 
