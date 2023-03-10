@@ -13,7 +13,7 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /bbdatabase && chmod +x /bbdatabase
+RUN go build -o /bbdatabase
 
 ##
 ## Deploy
@@ -24,8 +24,10 @@ WORKDIR /
 
 COPY --from=build BBDB/BBDB.go /bbdatabase
 
+RUN chmod +x /bbdatabase  
+
 EXPOSE 3333
 
-USER nobody
+# USER nobody
 
 ENTRYPOINT ["/bbdatabase"]
