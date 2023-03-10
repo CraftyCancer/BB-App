@@ -5,7 +5,7 @@
 ##
 FROM golang:1.16-buster AS build
 
-WORKDIR /
+WORKDIR /BBDB
 
  COPY BBDB/go.mod ./
  COPY BBDB/BBDB.go ./
