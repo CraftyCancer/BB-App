@@ -23,11 +23,10 @@ FROM gcr.io/distroless/base-debian10
 WORKDIR /
 
 COPY --from=build /bbserver /bbserver
-COPY --from=build /etc/passwd /etc/passwd
 
 EXPOSE 8095
 EXPOSE 3333
 
-USER bbserveruser
+USER nobody
 
 ENTRYPOINT ["/bbserver"]
