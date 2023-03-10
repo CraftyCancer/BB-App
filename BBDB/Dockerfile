@@ -9,17 +9,16 @@ WORKDIR /BBDB
 
 COPY BBDB/go.mod ./
 COPY BBDB/BBDB.go ./
-# COPY go.sum ./
 RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /bbdatabase
+RUN go build -o /bbdatabase && chmod +x /bbdatabase
 
 ##
 ## Deploy
 ##
-FROM busybox:1.33.1
+FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
