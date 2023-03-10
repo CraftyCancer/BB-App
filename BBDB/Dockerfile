@@ -27,6 +27,6 @@ COPY --from=build BBDB/BBDB.go /bbdatabase
 
 EXPOSE 3333
 
-USER nonroot:nonroot
+USER nobody
 
 ENTRYPOINT ["/bbdatabase"]
