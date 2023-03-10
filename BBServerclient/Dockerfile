@@ -5,7 +5,7 @@
 ##
 FROM golang:1.16-buster AS build
 
-WORKDIR /BBServerClient
+WORKDIR /BBServerclient
 
 COPY BBServerclient/go.mod ./
 COPY BBServerclient/BBServer.go ./ 
@@ -23,7 +23,7 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build BBServer/BBServer.go /bbserver
+COPY --from=build BBServerclient/BBServer.go /bbserver
 
 EXPOSE 8095
 EXPOSE 3333
