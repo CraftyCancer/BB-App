@@ -23,7 +23,7 @@ FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
 
-COPY --from=build BBServerclient/BBServer.go /bbserver
+COPY --from=build BBServerclient/BBServer.go /BBServerclient
 
 EXPOSE 8095
 EXPOSE 3333
