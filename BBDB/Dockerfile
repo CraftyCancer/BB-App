@@ -7,10 +7,10 @@ FROM golang:1.16-buster AS build
 
 WORKDIR /BBDB
 
- COPY BBDB/go.mod ./
- COPY BBDB/BBDB.go ./
+COPY BBDB/go.mod ./
+COPY BBDB/BBDB.go ./
 # COPY go.sum ./
- RUN go mod download
+RUN go mod download
 
 COPY *.go ./
 
@@ -19,13 +19,11 @@ RUN go build -o /bbdatabase
 ##
 ## Deploy
 ##
-FROM gcr.io/distroless/base-debian10
+FROM debian:10-slim
 
 WORKDIR /
 
 COPY --from=build BBDB/BBDB.go /bbdatabase
-
-RUN chmod +x /bbdatabase
 
 EXPOSE 3333
 
