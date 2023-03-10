@@ -25,7 +25,7 @@ WORKDIR /
 
 COPY --from=build BBServer/BBServer.go /bbserver
 
-EXPOSE 8080
+EXPOSE 8095
 EXPOSE 3333
 
 USER nonroot:nonroot
