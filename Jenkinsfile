@@ -7,7 +7,7 @@ pipeline {
                 git 'https://github.com/CraftyCancer/BB-App.git'
             }
         }
-         stage('Build') {
+        stage('Build') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'divi321', passwordVariable: 'Divya@123')]) {
                     script {
@@ -28,7 +28,11 @@ pipeline {
                 }
             }
         }
-        
+        stage ('Scan') {
+            steps {
+                sh ' docker scan divi321/aliceclient'
+            }
+        }
         stage('Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
