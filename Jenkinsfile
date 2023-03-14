@@ -28,11 +28,25 @@ pipeline {
                 }
             }
         }
-        stage ('Scan') {
-            steps {
-                sh ' docker scan divi321/aliceclient'
-            }
-        }
+        stage('Docker Scan') {
+			steps {
+				script {
+					def userInput = input(
+					id: 'docker-scan-consent',
+					message: 'Docker Scan relies upon access to Snyk, a third party provider, do you consent to proceed using Snyk?',
+					parameters: [
+					[$class: 'ChoiceParameterDefinition',
+					choices: ['Yes'],
+					description: 'Please select Yes to proceed.',
+					name: 'Consent']
+					],
+					defaultValue: 'Yes'
+					)
+				sh 'docker scan divi321/aliceclient'
+				}
+			}
+		}
+
         stage('Deploy') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
