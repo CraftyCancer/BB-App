@@ -7,22 +7,21 @@ pipeline {
                 git 'https://github.com/CraftyCancer/BB-App.git'
             }
         }
-        
-        stage('Build') {
+         stage('Build') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'divya' passwordVariable: '123@1')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'divi321', passwordVariable: 'Divya@123')]) {
                     script {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            def customImage = docker.build("d1034/aliceclient", "--file Aliceclient/Dockerfile .")
+                            def customImage = docker.build("divi321/aliceclient", "--file Aliceclient/Dockerfile .")
                             customImage.push()
                             
-                            def customImage_1 = docker.build("d1034/bobclient", "--file Bobclient/Dockerfile .")
+                            def customImage_1 = docker.build("divi321/bobclient", "--file Bobclient/Dockerfile .")
                             customImage_1.push()
                             
-                            def customImage_2 = docker.build("d1034/bbdb", "--file BBDB/Dockerfile .")
+                            def customImage_2 = docker.build("divi321/bbdb", "--file BBDB/Dockerfile .")
                             customImage_2.push()
                             
-                            def customImage_3 = docker.build("d1034/bbserverclient", "--file BBServerclient/Dockerfile .")
+                            def customImage_3 = docker.build("divi321/bbserverclient", "--file BBServerclient/Dockerfile .")
                             customImage_2.push()
                         }
                     }
@@ -35,16 +34,16 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     script {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            def customImage = docker.image('d1034/aliceclient')
+                            def customImage = docker.image('divi321/aliceclient')
                             customImage.run('-p 8095:80 -d')
                             
-                            def customImage_1 = docker.image('d1034/bbserverclient')
+                            def customImage_1 = docker.image('divi321/bbserverclient')
                             customImage_1.run()
                             
-                            def customImage_2 = docker.image('d1034/bobclient')
+                            def customImage_2 = docker.image('divi321/bobclient')
                             customImage_2.run()
                             
-                            def customImage_3 = docker.image('d1034/bbdb')
+                            def customImage_3 = docker.image('divi321/bbdb')
                             customImage_3.run()
                         }
                     }
