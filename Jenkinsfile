@@ -56,13 +56,13 @@ pipeline {
                             customImage.run('-p 8095:80 -d')
                             
                             def customImage_1 = docker.image('divi321/bbserverclient')
-                            customImage_1.run()
+                            customImage_1.run('-p 8096:81 -d')
                             
                             def customImage_2 = docker.image('divi321/bobclient')
-                            customImage_2.run()
+                            customImage_2.run('-p 8097:82 -d')
                             
                             def customImage_3 = docker.image('divi321/bbdb')
-                            customImage_3.run()
+                            customImage_3.run('-p 8098:83 -d')
                         }
                     }
                 }
