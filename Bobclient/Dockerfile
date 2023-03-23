@@ -26,7 +26,7 @@ COPY --from=build /client-bob /client-bob
 
 RUN chmod +x /client-bob
 
-EXPOSE 8095
+EXPOSE 8096
 
 USER nobody
 
