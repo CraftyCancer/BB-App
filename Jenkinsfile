@@ -22,7 +22,7 @@ pipeline {
                             customImage_2.push()
                             
                             def customImage_3 = docker.build("divi321/bbserverclient", "--file BBServerclient/Dockerfile .")
-                            customImage_2.push()
+                            customImage_3.push()
                         }
                     }
                 }
@@ -43,6 +43,7 @@ pipeline {
 					defaultValue: 'Yes'
 					)
 				sh 'docker scan divi321/aliceclient'
+				
 				}
 			}
 		}
